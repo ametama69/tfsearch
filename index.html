@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+
+
+
 <html lang=ja>
 <head>
 	<meta charset="UTF-8" />
@@ -12,6 +14,21 @@
 			<meta name="apple-mobile-web-app-title" content="Nirano Ohitashi" />
 			<link rel="manifest" href="../favicon/site.webmanifest" />
 
+			<style>
+				.fixed-button {
+					position: fixed;
+					bottom: 20px;
+					right: 20px;
+					background-color: #007bff;
+					color: white;
+					border: none;
+					padding: 10px 15px;
+					border-radius: 5px;
+					cursor: pointer;
+					z-index: 1000;
+				}
+			</style>
+
 </head>
 <body>
 <!--shinobi1-->
@@ -21,11 +38,17 @@
 <p>Twitterのフォロイーの別アカを探そうツール</p>
 <div id="app">
 
+	<!-- 画面右下に表示されるリンクボタン -->
+	<a v-if="selected.length || selected2.length || otherSnsArr.length" :href="`https://twitter.com/search?q=(`+selected.concat(otherSnsArr).join('%20｜%20')+') '+selected2.join('%20')+` `+excludedUsersArr.join('%20')+'&src=typed_query&f=live' + (filterfollowee ? '&pf=on' : '')" class="fixed-button" target="_blank">Search</a>
 
 	<div class="groupbox">
 		<div class="box-title">
 		Settings
 		</div>
+		<label>
+			<input type="checkbox" v-model="filterfollowee">
+			フォロイーのみ
+		</label>
 		<label v-for="(value,key) in lists2">　
 			<input type="checkbox" v-model="selected2" :value="value">
 			{{ key }}
@@ -40,8 +63,8 @@
 		<input type="button" value="✔ 全てのワードを選択" @click="selected=Object.values(lists).flat()" style="display: inline-block; _display: inline;">
 		<input type="button" value="✗ 全選択を解除" @click="selected=[]" style="display: inline-block; _display: inline;">
 	</div>
-	<a v-if="selected.length || selected2.length || otherSnsArr.length" :href="`https://twitter.com/search?q=(`+selected.concat(otherSnsArr).join('%20｜%20')+') '+selected2.join('%20')+` `+excludedUsersArr.join('%20')+'&src=typed_query&f=live'" target="_blank">
-	search : {{ selected }} {{otherSnsArr}} {{ selected2 }} {{excludedUsersArr}} </a>
+	<a v-if="selected.length || selected2.length || otherSnsArr.length" :href="`https://twitter.com/search?q=(`+selected.concat(otherSnsArr).join('%20｜%20')+') '+selected2.join('%20')+` `+excludedUsersArr.join('%20')+'&src=typed_query&f=live' + (filterfollowee ? '&pf=on' : '')" target="_blank">
+	search : {{ selected }} {{otherSnsArr}} {{ selected2 }} {{excludedUsersArr}} <span v-if="filterfollowee">フォローしているアカウント</span><span v-if="!filterfollowee">すべてのアカウント</span></a>
 	<div v-for="(value,key) in lists" class="groupbox">
 		<div class="box-title">
 			{{key}}
@@ -57,8 +80,8 @@
 	
   </span>
 	</div>
-	<a v-if="selected.length || selected2.length || otherSnsArr.length" :href="`https://twitter.com/search?q=(`+selected.concat(otherSnsArr).join('%20｜%20')+') '+selected2.join('%20')+` `+excludedUsersArr.join('%20')+'&src=typed_query&f=live'" target="_blank">
-		search : {{ selected }} {{otherSnsArr}} {{ selected2 }} {{excludedUsersArr}} </a>
+	<a v-if="selected.length || selected2.length || otherSnsArr.length" :href="`https://twitter.com/search?q=(`+selected.concat(otherSnsArr).join('%20｜%20')+') '+selected2.join('%20')+` `+excludedUsersArr.join('%20')+'&src=typed_query&f=live' + (filterfollowee ? '&pf=on' : '')" target="_blank">
+		search : {{ selected }} {{otherSnsArr}} {{ selected2 }} {{excludedUsersArr}} <span v-if="filterfollowee">フォローしているアカウント</span><span v-if="!filterfollowee">すべてのアカウント</span></a>
 	
 
 	<br>

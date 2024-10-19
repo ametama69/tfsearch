@@ -3,12 +3,12 @@ const app = Vue.createApp({
 data() {
 //	let selected = ref([])
 	let selected = ref(["Misskey","みすきー","ミスキー","Mastodon","ますとどん","マストドン",])
-	let selected2 = ref(["filter:follows"])
+	let selected2 = ref([])
 	let excludedUsers = ref("crepu_kuma onelinkers")
 	let excludedUsersArr = ref(["-from:crepu_kuma","-from:onelinkers"])
 	let otherSns = ref("")
 	let otherSnsArr = ref([]) 
-	let 
+	let filterfollowee = ref(true)
 	
 	const lists = ref({
 		"Misskey":["Misskey","みすきー","ミスキー"],
@@ -20,8 +20,7 @@ data() {
 		"Threads":["Threads","すれっず","スレッズ"],
 		"Crepu":["Crepu","クルップ","くるっぷ"],
 		"Bluesky":["Bluesky","ぶるーすかい","ブルースカイ","ブルスカ","ブルスコ","ぶるすか","🦋","青空"],
-		"Nostr":["Nostr","ノスター","ノストル","ノストラ"],
-		"Profile":["lit.link","リトリン","リットリンク","fedifile","フェディファイル","onelinkers","ワンリンカーズ","POTOFU","プロフカード","profcard"],
+		"Profile":["lit.link","リトリン","リットリンク","fedifile","onelinkers","ワンリンカーズ","プロフカード","profcard"],
 		"other":["移転","移行"],
 	  })
 	
@@ -43,7 +42,7 @@ data() {
 
 
 	const lists2 = ref({
-		"フォロイー限定":"filter:follows",
+		// "フォロイー限定":"filter:follows",
 		"リンクを含む":"filter:links",
 		"リンクを含まない":"-filter:links",
 		"画像を含む":"filter:images"
@@ -75,6 +74,7 @@ data() {
 	otherSnsArr,
 	lists,
 	lists2,
+	filterfollowee,
 	snsText,
 	minusUser,
 	checkgroup,
