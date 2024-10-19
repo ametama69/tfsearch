@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang=ja>
+<head>
+	<meta charset="UTF-8" />
+	<title>TF Search</title>
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+			<link rel="stylesheet" href="tfsearch.css">
+			<link rel="icon" type="image/png" href="../favicon/favicon-48x48.png" sizes="48x48" />
+			<link rel="icon" type="image/svg+xml" href="../favicon/favicon.svg" />
+			<link rel="shortcut icon" href="../favicon/favicon.ico" />
+			<link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png" />
+			<meta name="apple-mobile-web-app-title" content="Nirano Ohitashi" />
+			<link rel="manifest" href="../favicon/site.webmanifest" />
+
+</head>
+<body>
+<!--shinobi1-->
+<!-- <script type="text/javascript" src="//xa.shinobi.jp/ufo/191259303"></script><noscript><a href="//xa.shinobi.jp/bin/gg?191259303" target="_blank"><img src="//xa.shinobi.jp/bin/ll?191259303" border="0"></a><br><span style="font-size:9px"><img style="margin:0;vertical-align:text-bottom;" src="//img.shinobi.jp/tadaima/fj.gif" width="19" height="11"> </span></noscript> -->
+<!--shinobi2-->
+<h1>TF Search - Nirano Ohitashi</h1>
+<p>Twitterのフォロイーの別アカを探そうツール</p>
+<div id="app">
+
+
+	<div class="groupbox">
+		<div class="box-title">
+		Settings
+		</div>
+		<label v-for="(value,key) in lists2">　
+			<input type="checkbox" v-model="selected2" :value="value">
+			{{ key }}
+		</label>
+		<br>
+		<label for="other_sns">検索ワード自由記述欄</label>　<small>スペース区切リで入力</small><br>
+		<input id="other_sns" type="text" v-model="otherSns" @keyup="snsText()" style="float: left;"><input type="button" value="✗" @click=" otherSns=``,snsText()" style="display: inline-block; _display: inline; padding: 0.68em 1em;"><br>
+		
+		<label for="minus_user">検索除外ユーザー</label>　<small>各SNS公式アカウントなどのマイナス検索を想定しています</small><br>
+		<input id="minus_user" type="text" v-model="excludedUsers" @keyup="minusUser()" style="float: left;"><input type="button" value="✗" @click="display: inline-block; _display: inline; excludedUsers=``,minusUser()" style="padding: 0.68em 1em;"><br>
+		
+		<input type="button" value="✔ 全てのワードを選択" @click="selected=Object.values(lists).flat()" style="display: inline-block; _display: inline;">
+		<input type="button" value="✗ 全選択を解除" @click="selected=[]" style="display: inline-block; _display: inline;">
+	</div>
+	<a v-if="selected.length || selected2.length || otherSnsArr.length" :href="`https://twitter.com/search?q=(`+selected.concat(otherSnsArr).join('%20｜%20')+') '+selected2.join('%20')+` `+excludedUsersArr.join('%20')+'&src=typed_query&f=live'" target="_blank">
+	search : {{ selected }} {{otherSnsArr}} {{ selected2 }} {{excludedUsersArr}} </a>
+	<div v-for="(value,key) in lists" class="groupbox">
+		<div class="box-title">
+			{{key}}
+		</div>
+	  <label v-for="(item,index) in value">　
+	  <input type="checkbox" v-model="selected" :value="item">
+	  {{ item }}
+	  </label>
+	  　
+  <span class="buttons">
+	  <input type="button" value="✔" @click="checkgroup(key)" style="display: inline-block; _display: inline; padding: 0.68em 1em;">
+			<input type="button" value="✗" @click="uncheckgroup(key)" style="display: inline-block; _display: inline; padding: 0.68em 1em;">
+	
+  </span>
+	</div>
+	<a v-if="selected.length || selected2.length || otherSnsArr.length" :href="`https://twitter.com/search?q=(`+selected.concat(otherSnsArr).join('%20｜%20')+') '+selected2.join('%20')+` `+excludedUsersArr.join('%20')+'&src=typed_query&f=live'" target="_blank">
+		search : {{ selected }} {{otherSnsArr}} {{ selected2 }} {{excludedUsersArr}} </a>
+	
+
+	<br>
+	
+  
+
+<br/>
+</div>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="tfsearch.js">
+
+</script>
+<p>
+チェック入ってるワードでツイートOR検索するURLへのリンク貼るだけのやつです。<br>
+なんかOR検索するとあいまい検索が入らないっぽいので思いつくかぎりの表記揺れを書き出している<br>
+名前はTwitterのFolloweeの別アカをSearchするやつ的な感じで適当にファイル名決めてそのままのやつ
+</p>
+<p>
+	<div id="socialshare" style="display: flex;" data-color="#333,#eee,#ccc,#aaa" data-color2="#ccc,#111,#333,#666" data-text="" data-url="">
+
+		[["X(Twitter)","https://twitter.com/intent/post?text=","ph ph-x-logo"],
+		["Threads","https://www.threads.net/intent/post?text=","ph ph-threads-logo"],
+		["Bluesky","https://bsky.app/intent/compose?text=","ph ph-butterfly"],
+		["Taittsu","https://taittsuu.com/share?text=","ph ph-pants"],
+		["fedifile","https://fedifile.net/share?text=","ph ph-fediverse-logo"]]       </div>
+		
+		<script src="https://ametama69.github.io/socialshare/socialshare.js"></script>
+			  
+	
+</p>
+<p>
+</p>
+<p>
+2024-10-20(Sun) <a href="https://nirano.ohitashi.com/tfsearch/">ここ</a>から移転したりキーワード見直したり<br>
+2024-1-15(Mon) 検索対象ワードを増やすついでにVue3で書き直した　
+<a href="index_old.html">旧版はこちら</a>  <br/>
+2023-7-27(Thu) TwitterのOR検索無効になってたので対応<br/>
+2023-4-4(Tue) だいたいできた<br/>
+</p>
+
+<p>
+
+<a href="../">Top</a>
+</p>
+</body>
+</html>

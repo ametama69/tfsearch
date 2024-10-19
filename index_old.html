@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang=ja>
+<head>
+	<meta charset="UTF-8" />
+	<title>TF Search</title>
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+
+</head>
+<body>
+<!--shinobi1--><script type="text/javascript" src="//xa.shinobi.jp/ufo/191259305"></script><noscript><a href="//xa.shinobi.jp/bin/gg?191259305" target="_blank"><img src="//xa.shinobi.jp/bin/ll?191259305" border="0"></a><br><span style="font-size:9px"><img style="margin:0;vertical-align:text-bottom;" src="//img.shinobi.jp/tadaima/fj.gif" width="19" height="11"> </span></noscript><!--shinobi2-->
+<h1>TF Search</h1>
+<p>旧：Twitterのフォロイーの別アカを探そうツール</p>
+<p><a href="index.html">新版</a></p>
+<p>
+	<form id="myForm">
+		<div id="checkboxes"></div>
+
+
+		
+<!--		<button type="button" onclick="showCheckedItems()">選択された項目を表示する</button><br/><br/>
+		-->
+
+		そのほかのSNSなど<br/>
+		<input type="text" placeholder="スペース区切りでワードを追加" id="freeword"></input><br/>
+		除外ユーザID（@不要）<br/>
+		<input type="text" placeholder="スペース区切りでワードを追加" id="minusId" value="crepu_kuma"></input>
+		<small>各SNS公式アカウントなどのマイナス検索を想定しています</small>
+		<br/>
+		<br/>
+		
+		<div id="checkboxes2">
+		<input type="checkbox" name="follows" id="follows" value="filter:follows" checked><label for="follows">フォロイー限定</label>
+		<input type="checkbox" name="links" id="links" value="filter:links" checked><label for="links">リンクを含む</label>
+		<input type="checkbox" name="notlinks" id="notlinks" value="-filter:links"><label for="notlinks">リンクを含まない</label>
+		<input type="checkbox" name="images" id="images" value="filter:images"><label for="images">画像を含む</label>
+		</div>
+	</form>
+			<div>
+			<button onclick="checkAll()">全てチェックする</button>
+			<button onclick="uncheckAll()">全てチェック解除する</button>
+			<button onclick="invertAll()">チェックを反転する</button>
+		</div>
+<br/>
+
+<input type="button" value="実行" id="yacchimau" onclick="main()"/>
+<br/>
+<br/>
+
+<div id="outputLinks"></div>
+
+	<script type="text/javascript" src="tfsearch_old.js"></script>
+<br/>
+</form>
+</p>
+
+<p>
+チェック入ってるワードでツイートOR検索するURLへのリンク貼るだけのやつです。
+</p>
+<p>
+</p>
+<p>
+</p>
+<p>
+2023-7-27(Thu) TwitterのOR検索無効になってたので対応<br/>
+2023-4-4(Tue) だいたいできた<br/>
+</p>
+
+<p>
+
+<a href="../">Top</a>
+</p>
+</body>
+</html>

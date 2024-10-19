@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+    <script>
+            const baseUrl = "https://twitter.com/search?q=";
+            const suffix = "&src=typed_query&f=live&pf=on";
+            const hiragana = [
+                "あ", "い", "う", "え", "お",
+                "か", "き", "く", "け", "こ",
+                "が", "ぎ", "ぐ", "げ", "ご",
+                "さ", "し", "す", "せ", "そ",
+                "ざ", "じ", "ず", "ぜ", "ぞ",
+                "た", "ち", "つ", "て", "と",
+                "だ", "ぢ", "づ", "で", "ど",
+                "な", "に", "ぬ", "ね", "の",
+                "は", "ひ", "ふ", "へ", "ほ",
+                "ば", "び", "ぶ", "べ", "ぼ",
+                "ま", "み", "む", "め", "も",
+                "や", "ゆ", "よ",
+                "ら", "り", "る", "れ", "ろ",
+                "わ", "を", "ん",
+                "ア", "イ", "ウ", "エ", "オ",
+                "カ", "キ", "ク", "ケ", "コ",
+                "ガ", "ギ", "グ", "ゲ", "ゴ",
+                "サ", "シ", "ス", "セ", "ソ",
+                "ザ", "ジ", "ズ", "ゼ", "ゾ",
+                "タ", "チ", "ツ", "テ", "ト",
+                "ダ", "ヂ", "ヅ", "デ", "ド",
+                "ナ", "ニ", "ヌ", "ネ", "ノ",
+                "ハ", "ヒ", "フ", "ヘ", "ホ",
+                "バ", "ビ", "ブ", "ベ", "ボ",
+                "マ", "ミ", "ム", "メ", "モ",
+                "ヤ", "ユ", "ヨ",
+                "ラ", "リ", "ル", "レ", "ロ",
+                "ワ", "ヲ", "ン",
+                
+                "ああ", "あい", "あう", "あえ", "あお",
+                "あか", "あき", "あく", "あけ", "あこ",
+                "あが", "あぎ", "あぐ", "あげ", "あご",
+                "あさ", "あし", "あす", "あせ", "あそ",
+                "あざ", "あじ", "あず", "あぜ", "あぞ",
+                "あた", "あち", "あつ", "あて", "あと",
+                "あだ", "あぢ", "あづ", "あで", "あど",
+                "あな", "あに", "あぬ", "あね", "あの",
+                "あは", "あひ", "あふ", "あへ", "あほ",
+                "あば", "あび", "あぶ", "あべ", "あぼ",
+                "あま", "あみ", "あむ", "あめ", "あも",
+                "あや", "あゆ", "あよ",
+                "あら", "あり", "ある", "あれ", "あろ",
+                "あわ", "あを", "あん"
+            ];
+
+            let links = [];
+            for (let i = 0; i < hiragana.length; i++) {
+                for (let j = 0; j <= i; j++) {
+                    const query = `(${hiragana.slice(0, i + 1).join(' ｜ ')})`;
+                    links.push(baseUrl + encodeURIComponent(query) + suffix);
+                }
+            }
+            const generateHiraganaCombinations = (hiragana) => {
+                const combinations = [];
+                for (let i = 1; i <= hiragana.length; i++) {
+                    const currentCombination = hiragana.slice(0, i).join(' ｜ ');
+                    combinations.push(`(${currentCombination})`);
+                }
+                return combinations;
+            };
+
+            const hiraganaCombinations = generateHiraganaCombinations(hiragana);
+            console.log(hiraganaCombinations);
+                
+        hiraganaCombinations.forEach(combination => {
+            const a = document.createElement('a');
+            a.href = baseUrl + encodeURIComponent(combination) + suffix;
+            a.textContent = combination;
+            a.target = "_blank";
+            document.querySelector('.container').appendChild(a);
+            document.querySelector('.container').appendChild(document.createElement('br'));
+        });
+    </script>
+    </div>
+</body>
+</html>

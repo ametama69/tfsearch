@@ -1,0 +1,28 @@
+.container {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	gap: 16px;
+  }
+
+.groupbox{
+	margin: 1em auto; /* ボックスの余白 */
+	padding:1em 1em 0.5em 6em; /* ボックス内側余白 */
+	position:relative; /* 配置(ここを基準に)*/
+	border: 1px solid #909792;	/* ボックスの線 (太さ　種類　色)*/
+	
+
+}
+.groupbox .box-title {
+	background-color:#909792; /* タイトル背景色 */
+	font-size: 1em;/* タイトル文字の大きさ */
+	color: #fff ; /* タイトル文字色 */
+	padding: 7px 10px;/*タイトルの余白*/
+	line-height: 1;/*タイトルの行の高さ*/
+	position:absolute;	/* 配置(ここを動かす) */
+	top: 0; /*上から（0px）移動*/
+	left: 0; /*左から(0px)移動*/
+}
+.groupbox .buttons{
+	text-align: right;
+	display: block;
+}
