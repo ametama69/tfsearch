@@ -1,25 +1,4 @@
 
-@media screen and (max-width: 480px) {
-	#socialshare {
-		transform: scale(1.3);
-	}
-
-	.groupbox {
-		font-size: 1.2em; /* ボックス内の全ての要素の文字サイズを大きくする */
-	}
-	.groupbox label {
-		font-size: 1.2em; /* ラベルの文字サイズを大きくする */
-	}
-	.groupbox input[type="button"], .groupbox input[type="checkbox"] {
-		font-size: 1.2em; /* ボタンとチェックボックスの文字サイズを大きくする */
-	}
-	.fixed-button {
-		font-size: 1.2em; /* 固定ボタンの文字サイズを大きくする */
-	}
-
-
-
-	}
 
 .container {
 	display: grid;
@@ -48,4 +27,17 @@
 .groupbox .buttons{
 	text-align: right;
 	display: block;
+}
+
+.fixed-button {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	padding: 10px 15px;
+	border-radius: 5px;
+	cursor: pointer;
+	z-index: 1000;
 }
