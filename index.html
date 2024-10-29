@@ -26,7 +26,8 @@
 <div id="app">
 
 	<!-- 画面右下に表示されるリンクボタン -->
-	<a v-if="selected.length || selected2.length || otherSnsArr.length" :href="`https://twitter.com/search?q=(`+selected.concat(otherSnsArr).join('%20｜%20')+') '+selected2.join('%20')+` `+excludedUsersArr.join('%20')+'&src=typed_query&f=live' + (filterfollowee ? '&pf=on' : '')" class="fixed-button" target="_blank">Search</a>
+	<a v-if="selected.length || selected2.length || otherSnsArr.length" :href="`https://twitter.com/search?q=(`+selected.concat(otherSnsArr).join('%20｜%20')+') '+selected2.join('%20')+` `+excludedUsersArr.join('%20')+'&src=typed_query&f=live' + (filterfollowee ? '&pf=on' : '')" class="fixed-button" target="_blank">
+		<i class="ph ph-magnifying-glass"></i> Search</a>
 
 	<div class="groupbox">
 		<div class="box-title">
@@ -86,14 +87,15 @@
 なんかOR検索するとあいまい検索が入らないっぽいので思いつくかぎりの表記揺れを書き出している<br>
 名前はTwitterのFolloweeの別アカをSearchするやつ的な感じで適当にファイル名決めてそのままのやつ
 </p>
-<p>
+<p><h5>Share on</h5>
 	<div id="socialshare" style="display: flex;" data-color="#333,#eee,#ccc,#aaa" data-color2="#ccc,#111,#333,#666" data-text="" data-url="">
 
 		[["X(Twitter)","https://twitter.com/intent/post?text=","ph ph-x-logo"],
 		["Threads","https://www.threads.net/intent/post?text=","ph ph-threads-logo"],
 		["Bluesky","https://bsky.app/intent/compose?text=","ph ph-butterfly"],
 		["Taittsu","https://taittsuu.com/share?text=","ph ph-pants"],
-		["fedifile","https://fedifile.net/share?text=","ph ph-fediverse-logo"]]       </div>
+		["fedifile","https://fedifile.net/share?text=","ph ph-fediverse-logo"]]       
+	</div>
 		
 		<script src="socialshare.js"></script>
 			  
@@ -102,6 +104,7 @@
 <p>
 </p>
 <p>
+2024-10-30(Wed) UIの軽微な修正
 2024-10-20(Sun) <a href="https://nirano.ohitashi.com/tfsearch/">ここ</a>から移転したりキーワード見直したり<br>
 2024-1-15(Mon) 検索対象ワードを増やすついでにVue3で書き直した　
 <a href="index_old.html">旧版はこちら</a>  <br/>
