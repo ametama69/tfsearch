@@ -11,6 +11,7 @@ data() {
 	let filterfollowee = ref(true)
 	
 	const lists = ref({
+		"Mixi2":["Mixi2","みくし"],
 		"Misskey":["Misskey","みすきー","ミスキー"],
 		"Server-1":["misskey.io","nijimiss.moe","misskey.art","にじみす","Mivatter","みべったー"],
 		"Mastodon":["Mastodon","ますとどん","マストドン"],
