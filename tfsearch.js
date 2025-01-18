@@ -11,7 +11,7 @@ data() {
 	let filterfollowee = ref(true)
 	
 	const lists = ref({
-		"Mixi2":["Mixi2","みくし"],
+		"Mixi2":["Mixi2","みくし","mixi.social"],
 		"Misskey":["Misskey","みすきー","ミスキー"],
 		"Server-1":["misskey.io","nijimiss.moe","misskey.art","にじみす","Mivatter","みべったー"],
 		"Mastodon":["Mastodon","ますとどん","マストドン"],
@@ -20,7 +20,7 @@ data() {
 		"Taittsu":["taittsu","たいっつー","タイッツー","タイツ"],
 		"Threads":["Threads","すれっず","スレッズ"],
 		"Crepu":["Crepu","クルップ","くるっぷ"],
-		"Bluesky":["Bluesky","ぶるーすかい","ブルースカイ","ブルスカ","ブルスコ","ぶるすか","🦋","青空"],
+		"Bluesky":["Bluesky","ぶるーすかい","ブルースカイ","ブルスカ","ブルスコ","ぶるすか","🦋","青空","bsky.app"],
 		"Profile":["lit.link","リトリン","リットリンク","fedifile","onelinkers","ワンリンカーズ","プロフカード","profcard"],
 		"other":["移転","移行"],
 	  })
@@ -80,6 +80,22 @@ data() {
 	minusUser,
 	checkgroup,
 	uncheckgroup
+  }
+},
+computed: {
+  searchUrl() {
+	const baseUrl = 'https://twitter.com/search?q=';
+	const searchTerms = `(${this.selected.concat(this.otherSnsArr).join('%20｜%20')})`;
+	const additionalTerms = this.selected2.join('%20');
+	const excludedTerms = this.excludedUsersArr.join('%20');
+	const followeeFilter = this.filterfollowee ? '&pf=on' : '';
+	
+	return `${baseUrl}${searchTerms} ${additionalTerms} ${excludedTerms}&src=typed_query&f=live${followeeFilter}`;
+  },
+  queryLength() {
+    const query = `(${this.selected.concat(this.otherSnsArr).join('%20｜%20')}) ${this.selected2.join('%20')} ${this.excludedUsersArr.join('%20')}`;
+    return query.length;
+	// return new TextEncoder().encode(query).length;
   }
 }
 })

@@ -46,8 +46,11 @@
 <div id="app">
 
 	<!-- 画面右下に表示されるリンクボタン -->
-	<a v-if="selected.length || selected2.length || otherSnsArr.length" :href="`https://twitter.com/search?q=(`+selected.concat(otherSnsArr).join('%20｜%20')+') '+selected2.join('%20')+` `+excludedUsersArr.join('%20')+'&src=typed_query&f=live' + (filterfollowee ? '&pf=on' : '')" class="fixed-button" target="_blank">
-		<i class="ph ph-magnifying-glass"></i> Search</a>
+	<a v-if="selected.length || selected2.length || otherSnsArr.length" 
+	:href="searchUrl" 
+	:class="['fixed-button', { 'warn-button': queryLength > 650 , 'danger-button': queryLength > 688}]" 
+	target="_blank">
+  <i class="ph ph-magnifying-glass"></i> Search <small>{{queryLength}}</small> </a>
 
 	<div class="groupbox">
 		<div class="box-title">
@@ -71,7 +74,7 @@
 		<input type="button" value="✔ 全てのワードを選択" @click="selected=Object.values(lists).flat()" style="display: inline-block; _display: inline;">
 		<input type="button" value="✗ 全選択を解除" @click="selected=[]" style="display: inline-block; _display: inline;">
 	</div>
-	<a v-if="selected.length || selected2.length || otherSnsArr.length" :href="`https://twitter.com/search?q=(`+selected.concat(otherSnsArr).join('%20｜%20')+') '+selected2.join('%20')+` `+excludedUsersArr.join('%20')+'&src=typed_query&f=live' + (filterfollowee ? '&pf=on' : '')" target="_blank">
+	<a v-if="selected.length || selected2.length || otherSnsArr.length" :href="searchUrl" target="_blank">
 	search : {{ selected }} {{otherSnsArr}} {{ selected2 }} {{excludedUsersArr}} <span v-if="filterfollowee">フォローしているアカウント</span><span v-if="!filterfollowee">すべてのアカウント</span></a>
 	<div v-for="(value,key) in lists" class="groupbox">
 		<div class="box-title">
@@ -88,7 +91,7 @@
 	
   </span>
 	</div>
-	<a v-if="selected.length || selected2.length || otherSnsArr.length" :href="`https://twitter.com/search?q=(`+selected.concat(otherSnsArr).join('%20｜%20')+') '+selected2.join('%20')+` `+excludedUsersArr.join('%20')+'&src=typed_query&f=live' + (filterfollowee ? '&pf=on' : '')" target="_blank">
+	<a v-if="selected.length || selected2.length || otherSnsArr.length" :href="searchUrl" target="_blank">
 		search : {{ selected }} {{otherSnsArr}} {{ selected2 }} {{excludedUsersArr}} <span v-if="filterfollowee">フォローしているアカウント</span><span v-if="!filterfollowee">すべてのアカウント</span></a>
 	
 
@@ -106,6 +109,8 @@
 チェック入ってるワードでツイートOR検索するURLへのリンク貼るだけのやつです<br>
 なんかOR検索するとあいまい検索が入らないっぽいので思いつくかぎりの表記揺れを書き出している…とりあえず全ワード選択で検索したり興味あるSNSに絞って検索してみるといいとおもう<br>
 OR検索のワードに文字数上限あるっぽいのでギリギリの量にしている、全選択で使える状態を維持するために削るかワードは増やした上でおすすめセットABCみたいにするか悩み中…<br>
+とりあえずフィルタの機能が怪しくなる文字数に達するとボタンが
+<span style="color: yellow;">黄色</span>や<span style="color: red;">赤</span>になる機能をつけました<br>
 名前はTwitterのFolloweeの別アカをSearchするやつ的な感じで適当にファイル名決めてそのままのやつ
 </p>
 <p><h5>Share on</h5>
@@ -125,6 +130,7 @@ OR検索のワードに文字数上限あるっぽいのでギリギリの量に
 <p>
 </p>
 <p>
+2025-1-19(Sun) 検索文字数カウンター機能の追加<br>
 2024-12-17(Tue) 対象ワードの調整<br>
 2024-10-30(Wed) UIの軽微な修正<br>
 2024-10-20(Sun) <a href="https://nirano.ohitashi.com/tfsearch/">ここ</a>から移転したりキーワード見直したり<br>
