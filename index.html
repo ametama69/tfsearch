@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
 	<link rel="stylesheet" href="tfsearch.css">
 	
-	<script src="https://unpkg.com/@phosphor-icons/web"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/index.min.js"></script>
 	<!-- Phosphor Icons https://phosphoricons.com/ MIT License-->
 	<link rel="icon" type="image/png" href="https://ametama69.github.io/favicon/favicon-48x48.png" sizes="48x48" />
 	<link rel="icon" type="image/svg+xml" href="https://ametama69.github.io/favicon/favicon.svg" />
@@ -73,6 +73,13 @@
 		
 		<input type="button" value="✔ 全てのワードを選択" @click="selected=Object.values(lists).flat()" style="display: inline-block; _display: inline;">
 		<input type="button" value="✗ 全選択を解除" @click="selected=[]" style="display: inline-block; _display: inline;">
+		<input type="button" 
+       value="ランダムに追加" 
+       @click="addRandomItems()" 
+       :disabled="queryLength >= 688"
+       style="display: inline-block; _display: inline;">
+<input type="button" value="ランダムに削除" @click="removeRandomItems()" style="display: inline-block; _display: inline;">
+
 	</div>
 	<a v-if="selected.length || selected2.length || otherSnsArr.length" :href="searchUrl" target="_blank">
 	search : {{ selected }} {{otherSnsArr}} {{ selected2 }} {{excludedUsersArr}} <span v-if="filterfollowee">フォローしているアカウント</span><span v-if="!filterfollowee">すべてのアカウント</span></a>
@@ -130,6 +137,7 @@ OR検索のワードに文字数上限あるっぽいのでギリギリの量に
 <p>
 </p>
 <p>
+2025-3-23(Sun) ランダムに選択追加・削除機能の追加<br>
 2025-1-19(Sun) 検索文字数カウンター機能の追加<br>
 2024-12-17(Tue) 対象ワードの調整<br>
 2024-10-30(Wed) UIの軽微な修正<br>

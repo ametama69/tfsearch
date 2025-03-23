@@ -82,6 +82,33 @@ data() {
 	uncheckgroup
   }
 },
+methods: {
+  addRandomItems() {
+	// 全アイテムをフラット化して重複を除去
+	const allItems = Array.from(new Set(Object.values(this.lists).flat()));
+	// 現在選択されていないアイテムをフィルタリング
+	const availableItems = allItems.filter(item => !this.selected.includes(item));
+	
+	while (this.queryLength < 650 && availableItems.length > 0) {
+	  // ランダムなインデックスを生成
+	  const randomIndex = Math.floor(Math.random() * availableItems.length);
+	  // アイテムを選択に追加
+	  this.selected.push(availableItems[randomIndex]);
+	  // 使用したアイテムを削除
+	  availableItems.splice(randomIndex, 1);
+	}
+  },
+	removeRandomItems() {
+		while (this.queryLength >= 688 && this.selected.length > 0) {
+			// 選択されているアイテムのインデックスを取得
+			const selectedIndices = this.selected.map(item => this.selected.indexOf(item));
+			// 選択されているアイテムの中からランダムに1つを選択
+			const randomIndex = Math.floor(Math.random() * selectedIndices.length);
+			const randomItemIndex = selectedIndices[randomIndex];
+			// 選択されているアイテムの中からランダムに1つを削除
+			this.selected.splice(randomItemIndex, 1);
+		}
+	}},
 computed: {
   searchUrl() {
 	const baseUrl = 'https://twitter.com/search?q=';
